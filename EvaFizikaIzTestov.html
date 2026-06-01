@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="sl" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fizika 1. letnik – kviz, naloge in rešitve</title>
+
+  <!-- MathJax za lepe enačbe v nalogah in rešitvah -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)'], ['$', '$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+  <style>
+    :root, [data-theme="light"] {
+      --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-display: "Georgia", "Times New Roman", serif;
+
+      --text-xs: 0.75rem;
+      --text-sm: 0.9rem;
+      --text-base: 1rem;
+      --text-lg: 1.25rem;
+      --text-xl: 1.6rem;
+      --text-2xl: 2.1rem;
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+
+      --color-bg: #f7f6f2;
+      --color-surface: #f9f8f5;
+      --color-surface-2: #ffffff;
+      --color-surface-offset: #edeae5;
+      --color-border: #d4d1ca;
+      --color-text: #24221c;
+      --color-text-muted: #6f6b63;
+      --color-text-inverse: #faf8f2;
+
+      --color-primary: #01696f;
+      --color-primary-hover: #0c4e54;
+      --color-primary-highlight: #dcebea;
+      --color-success: #437a22;
+      --color-error: #a12c7b;
+
+      --radius-sm: 0.375rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1rem;
+      --radius-xl: 1.2rem;
+
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-md: 0 10px 30px rgba(0,0,0,0.08);
+      --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+
+      --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #171614;
+      --color-surface: #1c1b19;
+      --color-surface-2: #242320;
+      --color-surface-offset: #2b2926;
+      --color-border: #3a3834;
+      --color-text: #e7e3da;
+      --color-text-muted: #b7b2a8;
+      --color-text-inverse: #171614;
+      --color-primary: #66aab0;
+      --color-primary-hover: #8ec0c4;
+      --color-primary-highlight: #223537;
+      --color-success: #7bb450;
+      --color-error: #dd7fb6;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.22);
+      --shadow-md: 0 10px 30px rgba(0,0,0,0.3);
+      --shadow-lg: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at top right,
+          color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 28%),
+        radial-gradient(circle at bottom left,
+          color-mix(in srgb, var(--color-primary) 6%, transparent), transparent 24%),
+        var(--color-bg);
+      padding: var(--space-4);
+    }
+
+    button, input { font: inherit; }
+
+    .app {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: var(--space-6);
+    }
+
+    .panel {
+      background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero {
+      padding: var(--space-6);
+      display: grid;
+      gap: var(--space-6);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-mark {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 0.8rem;
+      background: linear-gradient(135deg,
+        var(--color-primary),
+        color-mix(in srgb, var(--color-primary) 55%, white));
+      position: relative;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
+    }
+    .logo-mark::before,
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      background: rgba(255,255,255,0.9);
+      border-radius: 999px;
+    }
+    .logo-mark::before {
+      width: 60%; height: 2px;
+      left: 20%; top: 50%;
+      transform: translateY(-50%);
+    }
+    .logo-mark::after {
+      width: 2px; height: 60%;
+      top: 20%; left: 50%;
+      transform: translateX(-50%);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      line-height: 1.1;
+      max-width: 18ch;
+    }
+
+    .lede {
+      color: var(--color-text-muted);
+      max-width: 65ch;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: var(--space-6);
+      align-items: start;
+    }
+
+    .chips { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+    .chip {
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      padding: 0.55rem 0.9rem;
+      font-size: var(--text-sm);
+    }
+
+    .controls {
+      display: grid;
+      gap: var(--space-4);
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+    }
+
+    .controls h2,
+    .quiz-card h2,
+    .results h2,
+    .review h2,
+    .worksheet h2 {
+      font-size: var(--text-lg);
+      line-height: 1.2;
+    }
+
+    .stats { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+    .stat {
+      background: var(--color-surface);
+      border-radius: 999px;
+      padding: 0.55rem 0.9rem;
+      font-size: var(--text-sm);
+    }
+    .stat strong { color: var(--color-primary); }
+
+    .btn, .theme-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      min-height: 44px;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      transition:
+        transform var(--transition),
+        background var(--transition),
+        border-color var(--transition);
+      cursor: pointer;
+      font-size: var(--text-sm);
+    }
+
+    .btn.primary {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      border-color: transparent;
+    }
+    .btn.primary:hover,
+    .btn.primary:focus-visible {
+      background: var(--color-primary-hover);
+    }
+    .btn:hover,
+    .theme-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .toggles { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+    .quiz-wrap {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: var(--space-6);
+    }
+
+    .quiz-card, .results, .review, .worksheet {
+      padding: var(--space-6);
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-4);
+    }
+
+    .progress {
+      width: 100%;
+      height: 10px;
+      background: var(--color-surface-offset);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: var(--space-5);
+    }
+    .progress > span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(
+        90deg,
+        var(--color-primary),
+        color-mix(in srgb, var(--color-primary) 60%, white));
+      transition: width 260ms ease;
+    }
+
+    .question-text {
+      font-size: var(--text-xl);
+      line-height: 1.2;
+      margin-bottom: var(--space-5);
+    }
+
+    .options {
+      display: grid;
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+    }
+
+    .option {
+      width: 100%;
+      text-align: left;
+      padding: 1rem;
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-3);
+      align-items: start;
+      cursor: pointer;
+      transition:
+        transform var(--transition),
+        border-color var(--transition),
+        background var(--transition),
+        box-shadow var(--transition);
+    }
+    .option:hover,
+    .option:focus-visible {
+      transform: translateY(-1px);
+      border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
+      box-shadow: var(--shadow-sm);
+    }
+    .option.selected {
+      border-color: var(--color-primary);
+      background: var(--color-primary-highlight);
+    }
+    .option.correct {
+      border-color: var(--color-success);
+      background: color-mix(in srgb, var(--color-success) 14%, var(--color-surface-2));
+    }
+    .option.wrong {
+      border-color: var(--color-error);
+      background: color-mix(in srgb, var(--color-error) 12%, var(--color-surface-2));
+    }
+
+    .letter {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: var(--color-surface-offset);
+      font-weight: 700;
+      font-size: var(--text-sm);
+    }
+
+    .feedback {
+      min-height: 4rem;
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-offset);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-5);
+      font-size: var(--text-sm);
+    }
+    .feedback strong { color: var(--color-text); }
+    .feedback.ok {
+      background: color-mix(in srgb, var(--color-success) 12%, var(--color-surface-offset));
+    }
+    .feedback.bad {
+      background: color-mix(in srgb, var(--color-error) 10%, var(--color-surface-offset));
+    }
+
+    .actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+    .results, .review {
+      display: grid;
+      gap: var(--space-5);
+      align-content: start;
+    }
+
+    .score-ring {
+      width: 8rem;
+      height: 8rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--color-primary) 0deg, var(--color-surface-offset) 0deg);
+      margin-inline: auto;
+      position: relative;
+    }
+    .score-ring::after {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 50%;
+      background: var(--color-surface);
+    }
+    .score-ring span {
+      position: relative;
+      z-index: 1;
+      font-size: var(--text-lg);
+      font-weight: 700;
+    }
+
+    .result-grid { display: grid; gap: var(--space-3); }
+
+    .result-item {
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      font-size: var(--text-sm);
+    }
+
+    .review-list { display: grid; gap: var(--space-4); }
+    .review-item {
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      font-size: var(--text-sm);
+    }
+    .review-item.correct-item {
+      border-color: color-mix(in srgb, var(--color-success) 35%, var(--color-border));
+    }
+    .review-item.wrong-item {
+      border-color: color-mix(in srgb, var(--color-error) 35%, var(--color-border));
+    }
+    .review-topic {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .footer-note {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      padding-bottom: var(--space-6);
+    }
+
+    /* Naloge in rešitve */
+    .worksheet {
+      background: color-mix(in srgb, var(--color-surface-2) 96%, transparent);
+    }
+    .worksheet h2 { margin-bottom: var(--space-3); }
+    .worksheet section { margin-bottom: var(--space-5); }
+    .worksheet ol,
+    .worksheet ul {
+      margin-left: 1.2rem;
+      margin-top: 0.5rem;
+      font-size: var(--text-sm);
+    }
+    .worksheet li { margin-bottom: 0.4rem; }
+    .step { margin-left: 1.2rem; }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+
+    @media (max-width: 900px) {
+      body { padding: var(--space-3); }
+      .hero-grid,
+      .quiz-wrap { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .panel,
+      .quiz-card,
+      .results,
+      .review,
+      .worksheet { border-radius: var(--radius-lg); padding: var(--space-5); }
+      h1 { font-size: 1.6rem; }
+      .question-text { font-size: 1.2rem; }
+      .score-ring { width: 6.5rem; height: 6.5rem; }
+    }
+
+    @media print {
+      body { padding: 0; background: #fff; }
+      .hero, .results, .review, .nav-links, .theme-btn, .btn { display: none !important; }
+      .worksheet { box-shadow: none; border-radius: 0; border: none; }
+      .app { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <!-- KVIZ -->
+    <section class="panel hero" id="kviz">
+      <div class="topbar">
+        <div class="logo" aria-label="Fizika kviz">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <span>Fizika 1. letnik – kviz in vaje</span>
+        </div>
+        <button class="theme-btn" type="button" id="themeToggle">🌙 Temni način</button>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <h1>Kviz + računske naloge + rešitve na eni strani.</h1>
+          <p class="lede">
+            Snov: meritve in napake, enote in predpone, pretvorbe, vzmeti (Hookov zakon),
+            energija, delo, moč ter raziskovalni postopek (žogice, skok s palico).
+          </p>
+          <div class="chips" style="margin-top: var(--space-5);">
+            <span class="chip">Meritve in napake</span>
+            <span class="chip">Newton, watt, džul</span>
+            <span class="chip">Pretvorbe enot</span>
+            <span class="chip">Vzmeti in graf F(x)</span>
+            <span class="chip">Skok s palico</span>
+            <span class="chip">Hipoteza – merjenje – teorija</span>
+          </div>
+        </div>
+
+        <aside class="controls">
+          <h2>Nastavitve kviza</h2>
+          <div class="stats">
+            <span class="stat"><strong>~35</strong> vprašanj</span>
+            <span class="stat"><strong>več</strong> tem</span>
+            <span class="stat"><strong>100%</strong> po tvoji snovi</span>
+          </div>
+          <div class="toggles">
+            <button class="btn primary" id="startBtn" type="button">Začni kviz</button>
+            <button class="btn" id="shuffleBtn" type="button">Premešaj vprašanja</button>
+            <button class="btn" id="resetBtn" type="button">Ponastavi</button>
+          </div>
+          <div class="nav-links">
+            <button class="btn" type="button"
+              onclick="document.getElementById('naloge').scrollIntoView({behavior:'smooth'})">
+              Pojdi na računske naloge
+            </button>
+            <button class="btn" type="button"
+              onclick="document.getElementById('resitve').scrollIntoView({behavior:'smooth'})">
+              Pojdi na rešitve
+            </button>
+            <button class="btn" type="button" onclick="window.print()">
+              Natisni (izberi strani)
+            </button>
+          </div>
+          <p class="lede" style="font-size: var(--text-sm);">
+            Vsako vprašanje ima razlago. Po kvizu reši še računske naloge spodaj
+            in preveri rešitve.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="quiz-wrap">
+      <section class="panel quiz-card">
+        <div class="meta">
+          <span id="topicLabel">Tema: priprava</span>
+          <span id="counterLabel">Vprašanje 0 / 0</span>
+        </div>
+        <div class="progress"><span id="progressBar"></span></div>
+        <h2 class="question-text" id="questionText">
+          Pritisni »Začni kviz«, da dobiš prvo vprašanje.
+        </h2>
+        <div class="options" id="options"></div>
+        <div class="feedback" id="feedback">
+          Tukaj se pokaže razlaga odgovora.
+        </div>
+        <div class="actions">
+          <button class="btn primary" id="nextBtn" type="button" disabled>Naslednje vprašanje</button>
+          <button class="btn" id="showAnswerBtn" type="button">Pokaži razlago</button>
+        </div>
+      </section>
+
+      <aside class="panel results">
+        <h2>Napredek</h2>
+        <div class="score-ring" id="scoreRing">
+          <span id="scoreValue">0%</span>
+        </div>
+        <div class="result-grid">
+          <div class="result-item">
+            <strong id="correctCount">0</strong><br />
+            <span>Pravilnih odgovorov</span>
+          </div>
+          <div class="result-item">
+            <strong id="wrongCount">0</strong><br />
+            <span>Napačnih odgovorov</span>
+          </div>
+          <div class="result-item">
+            <strong id="remainingCount">0</strong><br />
+            <span>Še nerešenih</span>
+          </div>
+        </div>
+        <p class="lede" style="font-size: var(--text-sm);">
+          Cilj: pridi vsaj nad 80 %. Če gre slabše, v spodnjih razdelkih reši
+          računske naloge in ponovi razlage.
+        </p>
+      </aside>
+    </section>
+
+    <section class="panel review">
+      <h2>Kaj še ponoviti</h2>
+      <div class="review-list" id="reviewList">
+        <div class="review-item">
+          <div class="review-topic">Priprava</div>
+          <p>
+            Po koncu kviza se tukaj pokaže seznam vprašanj, ki so ti delala
+            težave, skupaj s pravilnimi odgovori in kratko razlago.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RAČUNSKE NALOGE -->
+    <section class="panel worksheet" id="naloge">
+      <h2>Računske naloge (za vajo ali tisk)</h2>
+
+      <section>
+        <h3>1. Meritve in napake</h3>
+        <ol>
+          <li>
+            Meritev dolžine je zapisana:
+            \( l = 12,4\,cm \pm 0,2\,cm \).
+            Izračunaj:
+            <ul>
+              <li>najmanjšo veljavno meritev,</li>
+              <li>največjo veljavno meritev,</li>
+              <li>relativno napako v odstotkih.</li>
+            </ul>
+          </li>
+          <li>
+            Temperatura je izmerjena kot
+            \( T = 18,0\,^{\circ}C \pm 0,1\,^{\circ}C \).
+            Izračunaj relativno napako v odstotkih.
+          </li>
+          <li>
+            Pri merjenju mase zapišemo
+            \( m = 2,50\,kg \pm 0,05\,kg \).
+            Kolikšna je največja veljavna meritev in kolikšna je relativna napaka?
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h3>2. Pretvorbe enot</h3>
+        <ol start="4">
+          <li>
+            Pretvori:
+            <ul>
+              <li>0,018 l v ml,</li>
+              <li>0,0008 l v ml,</li>
+              <li>125 cm v mm.</li>
+            </ul>
+          </li>
+          <li>
+            Pretvori:
+            <ul>
+              <li>27 cm² v dm²,</li>
+              <li>2,7 cm² v dm²,</li>
+              <li>415 cm v m.</li>
+            </ul>
+          </li>
+          <li>
+            Pretvori:
+            <ul>
+              <li>7049 s v ure, minute, sekunde,</li>
+              <li>1250 s v ure, minute, sekunde,</li>
+              <li>450000 N v kN.</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h3>3. Vzmeti in Hookov zakon</h3>
+        <ol start="7">
+          <li>
+            Za vzmet velja \( F = 2,4\,N \) pri raztegu \( x = 6\,dm \).
+            Izračunaj koeficient vzmeti \( k \).
+          </li>
+          <li>
+            Koeficient vzmeti je \( k = 0,5\,N/dm \), sila pa \( F = 3\,N \).
+            Izračunaj razteg \( x \).
+          </li>
+          <li>
+            Vzmet ima koeficient \( k = 0,25\,N/dm \).
+            Kolikšna sila je potrebna za razteg \( 8\,dm \)?
+          </li>
+          <li>
+            Na grafu velja za neko vzmet: pri \( x = 4\,dm \) je \( F = 1\,N \).
+            <ul>
+              <li>Izračunaj \( k \).</li>
+              <li>Kolikšen razteg bi imela ista vzmet pri sili
+                \( 2,5\,N \)?</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h3>4. Povprečje, energija, delo, moč</h3>
+        <ol start="11">
+          <li>
+            Skakalec je preskočil: 4,10 m, 4,00 m, 4,25 m, 4,05 m in 4,20 m.
+            Izračunaj povprečno višino skoka.
+          </li>
+          <li>
+            Skakalec z maso 65 kg preskoči povprečno višino 4,09 m.
+            Izračunaj delo, ki ga opravi pri skoku.
+            Uporabi \( g = 9,81\,m/s^2 \).
+          </li>
+          <li>
+            Skakalec z maso 73 kg preskoči povprečno višino 4,146 m.
+            Izračunaj delo, ki ga opravi.
+            Uporabi \( g = 9,81\,m/s^2 \).
+          </li>
+          <li>
+            Če je delo 2610 J opravljeno v 8 s, izračunaj moč v vatih in v kilovatih.
+          </li>
+          <li>
+            Če je delo 29690 J opravljeno v 12 s, izračunaj moč v vatih in v kilovatih.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h3>5. Formule za ponovitev</h3>
+        <ul>
+          <li>Hookov zakon: \( F = k \cdot x \)</li>
+          <li>Koeficient vzmeti: \( k = \dfrac{F}{x} \)</li>
+          <li>Povprečje: vsota meritev / število meritev</li>
+          <li>Potencialna energija: \( E_p = m g h \)</li>
+          <li>Delo pri dvigu: \( W = m g h \)</li>
+          <li>Moč: \( P = \dfrac{W}{t} \)</li>
+          <li>Relativna napaka v %: \( \varepsilon = \dfrac{\Delta x}{x} \cdot 100\% \)</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- REŠITVE -->
+    <section class="panel worksheet" id="resitve">
+      <h2>Rešitve računskih nalog</h2>
+
+      <section>
+        <h3>1. Meritve in napake</h3>
+        <ol>
+          <li>
+            Meritev: \( l = 12,4\,cm \pm 0,2\,cm \)
+            <ul>
+              <li>
+                Najmanjša veljavna meritev:
+                <div class="step">
+                  \( l_{\min} = 12,4\,cm - 0,2\,cm = 12,2\,cm \)
+                </div>
+              </li>
+              <li>
+                Največja veljavna meritev:
+                <div class="step">
+                  \( l_{\max} = 12,4\,cm + 0,2\,cm = 12,6\,cm \)
+                </div>
+              </li>
+              <li>
+                Relativna napaka:
+                <div class="step">
+                  1. korak:
+                  \( \varepsilon = \dfrac{\Delta l}{l}
+                     = \dfrac{0,2}{12,4} \approx 0,0161 \)<br>
+                  2. korak:
+                  \( \varepsilon = 0,0161 \cdot 100\%
+                     \approx 1,61\% \)
+                </div>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Meritev: \( T = 18,0\,^{\circ}C \pm 0,1\,^{\circ}C \)
+            <ul>
+              <li>
+                Relativna napaka:
+                <div class="step">
+                  1. korak:
+                  \( \varepsilon = \dfrac{\Delta T}{T}
+                     = \dfrac{0,1}{18,0} \approx 0,0056 \)<br>
+                  2. korak:
+                  \( \varepsilon = 0,0056 \cdot 100\%
+                     \approx 0,56\% \)
+                </div>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Meritev: \( m = 2,50\,kg \pm 0,05\,kg \)
+            <ul>
+              <li>
+                Največja veljavna meritev:
+                <div class="step">
+                  \( m_{\max} = 2,50\,kg + 0,05\,kg = 2,55\,kg \)
+                </div>
+              </li>
+              <li>
+                Relativna napaka:
+                <div class="step">
+                  \( \varepsilon = \dfrac{0,05}{2,50} \cdot 100\%
+                     = 2\% \)
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h3>2. Pretvorbe enot</h3>
+        <ol start="4">
+          <li>
+            <ul>
+              <li>
+                0,018 l v ml:
+                <div class="step">
+                  \( 0,018\,l \cdot 1000 = 18\,ml \)
+                </div>
+              </li>
+              <li>
+                0,0008 l v ml:
+                <div class="step">
+                  \( 0,0008\,l \cdot 1000 = 0,8\,ml \)
+                </div>
+              </li>
+              <li>
+                125 cm v mm:
+                <div class="step">
+                  \( 125\,cm \cdot 10 = 1250\,mm \)
+                </div>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <ul>
+              <li>
+                27 cm² v dm²:
+                <div class="step">
+                  \( 27\,cm^2 : 100 = 0,27\,dm^2 \)
+                </div>
+              </li>
+              <li>
+                2,7 cm² v dm²:
+                <div class="step">
+                  \( 2,7\,cm^2 : 100 = 0,027\,dm^2 \)
+                </div>
+              </li>
+              <li>
+                415 cm v m:
+                <div class="step">
+                  \( 415\,cm : 100 = 4,15\,m \)
+                </div>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <ul>
+              <li>
+                7049 s v h, min, s:
+                <div class="step">
+                  \( 7049\,s : 3600 = 1\,h \) (ostane 3449 s)<br>
+                  \( 3449\,s : 60 = 57\,min \) (ostane 29 s)<br>
+                  Rezultat: 1 h 57 min 29 s
+                </div>
+              </li>
+              <li>
+                1250 s v h, min, s:
+                <div class="step">
+                  \( 1250\,s : 60 = 20\,min \) (ostane 50 s)<br>
+                  Rezultat: 0 h 20 min 50 s
+                </div>
+              </li>
+              <li>
+                450000 N v kN:
+                <div class="step">
+                  \( 450000\,N : 1000 = 450\,kN \)
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h3>3. Vzmeti in Hookov zakon</h3>
+        <ol start="7">
+          <li>
+            \( F = 2,4\,N,\; x = 6\,dm \)
+            <div class="step">
+              1. formula:
+              \( k = \dfrac{F}{x} \)<br>
+              2. vstavljanje:
+              \( k = \dfrac{2,4}{6} = 0,4\,N/dm \)
+            </div>
+          </li>
+
+          <li>
+            \( k = 0,5\,N/dm,\; F = 3\,N \)
+            <div class="step">
+              1. formula:
+              \( x = \dfrac{F}{k} \)<br>
+              2. vstavljanje:
+              \( x = \dfrac{3}{0,5} = 6\,dm \)
+            </div>
+          </li>
+
+          <li>
+            \( k = 0,25\,N/dm,\; x = 8\,dm \)
+            <div class="step">
+              1. formula:
+              \( F = k \cdot x \)<br>
+              2. vstavljanje:
+              \( F = 0,25 \cdot 8 = 2\,N \)
+            </div>
+          </li>
+
+          <li>
+            Pri \( x = 4\,dm \) je \( F = 1\,N \).
+            <ul>
+              <li>
+                Koeficient vzmeti:
+                <div class="step">
+                  \( k = \dfrac{F}{x} =
+                     \dfrac{1}{4} = 0,25\,N/dm \)
+                </div>
+              </li>
+              <li>
+                Pri sili \( F = 2,5\,N \):
+                <div class="step">
+                  \( x = \dfrac{F}{k} =
+                     \dfrac{2,5}{0,25} = 10\,dm \)
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h3>4. Povprečje, energija, delo, moč</h3>
+        <ol start="11">
+          <li>
+            Višine: 4,10 m; 4,00 m; 4,25 m; 4,05 m; 4,20 m.
+            <div class="step">
+              1. vsota:
+              \( 4,10 + 4,00 + 4,25 + 4,05 + 4,20
+                 = 20,60\,m \)<br>
+              2. povprečje:
+              \( \bar{h} = \dfrac{20,60}{5} = 4,12\,m \)
+            </div>
+          </li>
+
+          <li>
+            \( m = 65\,kg,\; \bar{h} = 4,09\,m,\; g = 9,81\,m/s^2 \)
+            <div class="step">
+              1. formula:
+              \( W = m g h \)<br>
+              2. vstavljanje:
+              \( W = 65 \cdot 9,81 \cdot 4,09
+                 \approx 2610\,J \)
+            </div>
+          </li>
+
+          <li>
+            \( m = 73\,kg,\; \bar{h} = 4,146\,m,\; g = 9,81\,m/s^2 \)
+            <div class="step">
+              1. formula:
+              \( W = m g h \)<br>
+              2. vstavljanje:
+              \( W = 73 \cdot 9,81 \cdot 4,146
+                 \approx 29690\,J \)
+            </div>
+          </li>
+
+          <li>
+            \( W = 2610\,J,\; t = 8\,s \)
+            <div class="step">
+              1. formula:
+              \( P = \dfrac{W}{t} \)<br>
+              2. vstavljanje:
+              \( P = \dfrac{2610}{8}
+                 \approx 326\,W \)<br>
+              3. v kW:
+              \( P \approx 0,326\,kW \)
+            </div>
+          </li>
+
+          <li>
+            \( W = 29690\,J,\; t = 12\,s \)
+            <div class="step">
+              1. formula:
+              \( P = \dfrac{W}{t} \)<br>
+              2. vstavljanje:
+              \( P = \dfrac{29690}{12}
+                 \approx 2474\,W \)<br>
+              3. v kW:
+              \( P \approx 2,474\,kW \)
+            </div>
+          </li>
+        </ol>
+      </section>
+    </section>
+
+    <p class="footer-note">
+      Stran združuje kviz za razumevanje pojmov in grafe, ter ločen
+      list računskih nalog in rešitev za utrjevanje računanja.
+    </p>
+  </main>
+
+  <!-- JS za kviz -->
+  <script>
+    const baseQuestions = [
+      {
+        topic: 'Meritve in napake',
+        question: 'Pri meritvi T = 37,1 °C ± 0,1 °C je največja veljavna meritev:',
+        options: ['37,0 °C', '37,1 °C', '37,2 °C', '36,9 °C'],
+        answer: 2,
+        explanation: 'Največja veljavna meritev je zgornja meja intervala: 37,1 + 0,1 = 37,2 °C.'
+      },
+      {
+        topic: 'Meritve in napake',
+        question: 'Pri meritvi T = 37,1 °C ± 0,1 °C je najmanjša veljavna meritev:',
+        options: ['36,9 °C', '37,0 °C', '37,1 °C', '37,2 °C'],
+        answer: 1,
+        explanation: 'Najmanjša veljavna meritev je spodnja meja intervala: 37,1 − 0,1 = 37,0 °C.'
+      },
+      {
+        topic: 'Meritve in napake',
+        question: 'Kako izračunamo relativno napako v odstotkih?',
+        options: [
+          'izmerjena vrednost / absolutna napaka × 100',
+          'absolutna napaka / izmerjena vrednost × 100',
+          'zgornja meja − spodnja meja',
+          'izmerjena vrednost × 100'
+        ],
+        answer: 1,
+        explanation: 'Relativna napaka v odstotkih je: absolutna napaka deljeno z izmerjeno vrednostjo, nato krat 100 %.'
+      },
+      {
+        topic: 'Meritve in napake',
+        question: 'Kolikšna je približno relativna napaka za T = 37,1 °C ± 0,1 °C?',
+        options: ['0,027 %', '0,27 %', '2,7 %', '27 %'],
+        answer: 1,
+        explanation: '0,1 / 37,1 × 100 ≈ 0,27 %.'
+      },
+      {
+        topic: 'Meritve in napake',
+        question: 'Kaj je najprimernejši primer vzroka za absolutno napako?',
+        options: [
+          'napačno odčitavanje merilnika',
+          'pravilna formula',
+          'večja masa telesa',
+          'lepši graf'
+        ],
+        answer: 0,
+        explanation: 'Absolutna napaka lahko nastane zaradi merilnika ali človeka, na primer zaradi napačnega odčitavanja.'
+      },
+      {
+        topic: 'Meritve in napake',
+        question: 'Kateri zapis najbolj jasno pokaže relativno napako meritve T = 37,1 °C ± 0,1 °C?',
+        options: [
+          'T = 37,1 °C ± 0,1 °C',
+          'T = 37,1 °C ± 0,27 %',
+          'T = 37,1 °C',
+          'T = 37,1 ± 0,27'
+        ],
+        answer: 1,
+        explanation: 'Relativno napako zapišemo v odstotkih: T = 37,1 °C ± 0,27 %.'
+      },
+      {
+        topic: 'Enote',
+        question: 'Sestavljena enota 1 N je enaka:',
+        options: ['1 kg·m/s²', '1 J/s', '1 kg/m²', '1 m/s'],
+        answer: 0,
+        explanation: 'Newton je enota za silo: 1 N = 1 kg·m/s².'
+      },
+      {
+        topic: 'Enote',
+        question: 'Sestavljena enota 1 W je enaka:',
+        options: ['1 N·m', '1 J/s', '1 kg·m/s²', '1 J·s'],
+        answer: 1,
+        explanation: 'Watt je enota za moč: 1 W = 1 J/s.'
+      },
+      {
+        topic: 'Enote',
+        question: 'Katera enota je osnovna enota za maso?',
+        options: ['newton', 'meter', 'kilogram', 'vat'],
+        answer: 2,
+        explanation: 'Osnovna SI-enota za maso je kilogram.'
+      },
+      {
+        topic: 'Predpone in pretvorbe',
+        question: 'Koliko je 0,004 l v mililitrih?',
+        options: ['0,4 ml', '4 ml', '40 ml', '400 ml'],
+        answer: 1,
+        explanation: '1 l = 1000 ml, zato je 0,004 l = 4 ml.'
+      },
+      {
+        topic: 'Predpone in pretvorbe',
+        question: 'Koliko je 2,7 cm² v dm²?',
+        options: ['0,027 dm²', '0,27 dm²', '2,7 dm²', '27 dm²'],
+        answer: 0,
+        explanation: 'Ker je 1 dm² = 100 cm², delimo s 100: 2,7 cm² = 0,027 dm².'
+      },
+      {
+        topic: 'Predpone in pretvorbe',
+        question: '1250 s pretvorimo v:',
+        options: ['0 h 20 min 50 s', '2 h 5 min 0 s', '20 h 50 min', '1 h 25 min 0 s'],
+        answer: 0,
+        explanation: '1250 s = 20 min in 50 s, torej 0 h 20 min 50 s.'
+      },
+      {
+        topic: 'Predpone in pretvorbe',
+        question: '450000 N lahko zapišemo kot:',
+        options: ['45 kN', '450 kN', '4,5 kN', '4500 kN'],
+        answer: 1,
+        explanation: '1 kN = 1000 N, zato 450000 N = 450 kN.'
+      },
+      {
+        topic: 'Predpone in pretvorbe',
+        question: '0,0008 l je enako:',
+        options: ['0,8 ml', '8 ml', '80 ml', '800 ml'],
+        answer: 0,
+        explanation: '0,0008 l × 1000 = 0,8 ml.'
+      },
+      {
+        topic: 'Predpone in pretvorbe',
+        question: '0,1 × 10⁻⁹ V zapišemo kot:',
+        options: ['100 nV', '0,1 nV', '100 pV', '1 μV'],
+        answer: 2,
+        explanation: '0,1 × 10⁻⁹ V = 10⁻¹⁰ V, kar je 100 pV.'
+      },
+      {
+        topic: 'Vzmeti in Hookov zakon',
+        question: 'Katera vzmet je najtrša na grafu F(x)?',
+        options: [
+          'Tista z najmanjšim naklonom',
+          'Tista z največjim naklonom',
+          'Vedno vzmet 1',
+          'Vedno vzmet 2'
+        ],
+        answer: 1,
+        explanation: 'Najtrša vzmet ima največji koeficient k, to pa pomeni najbolj strmo premico na grafu F(x).'
+      },
+      {
+        topic: 'Vzmeti in Hookov zakon',
+        question: 'Katera enačba opisuje Hookov zakon?',
+        options: ['F = m·g', 'F = k·x', 'P = W/t', 'E = m·c²'],
+        answer: 1,
+        explanation: 'Hookov zakon pove, da je sila sorazmerna raztegu: F = k·x.'
+      },
+      {
+        topic: 'Vzmeti in Hookov zakon',
+        question: 'Če za tretjo vzmet z grafa velja F = 4 N pri x = 8 dm, je koeficient k:',
+        options: ['0,25 N/dm', '0,5 N/dm', '2 N/dm', '32 N/dm'],
+        answer: 1,
+        explanation: 'k = F/x = 4/8 = 0,5 N/dm.'
+      },
+      {
+        topic: 'Vzmeti in Hookov zakon',
+        question: 'Če je k = 0,25 N/dm in je sila 1,5 N, kolikšen je razteg?',
+        options: ['0,375 dm', '3 dm', '6 dm', '12 dm'],
+        answer: 2,
+        explanation: 'x = F/k = 1,5 / 0,25 = 6 dm.'
+      },
+      {
+        topic: 'Vzmeti in Hookov zakon',
+        question: 'Vzmet ima koeficient k = 0,5 N/dm. Kolikšna sila deluje pri raztegu 6 dm?',
+        options: ['3 N', '0,12 N', '12 N', '30 N'],
+        answer: 0,
+        explanation: 'F = k·x = 0,5 · 6 = 3 N.'
+      },
+      {
+        topic: 'Vzmeti in Hookov zakon',
+        question: 'Vzmet ima koeficient k = 0,25 N/dm. Pri sili 1,0 N je razteg:',
+        options: ['0,25 dm', '2 dm', '4 dm', '5 dm'],
+        answer: 2,
+        explanation: 'x = F/k = 1,0 / 0,25 = 4 dm.'
+      },
+      {
+        topic: 'Vzmeti in Hookov zakon',
+        question: 'Graf F(x) za vzmet je:',
+        options: [
+          'krožnica',
+          'premica skozi izhodišče',
+          'parabola',
+          'vodoravna črta'
+        ],
+        answer: 1,
+        explanation: 'Pri Hookovem zakonu je F sorazmeren z x, zato dobimo premico skozi izhodišče.'
+      },
+      {
+        topic: 'Vzmeti in Hookov zakon',
+        question: 'Na grafu F(x) ima vzmet pri sili 1,5 N razteg približno 6 dm. Kaj to pomeni?',
+        options: [
+          'Pri 1,5 N se vzmet raztegne za 6 dm',
+          'Pri 6 N se vzmet raztegne za 1,5 dm',
+          'Graf ni linearen',
+          'Vzmet nima koeficienta k'
+        ],
+        answer: 0,
+        explanation: 'Točka (x = 6 dm, F = 1,5 N) pomeni, da se vzmet pri sili 1,5 N raztegne za 6 dm.'
+      },
+      {
+        topic: 'Vzmeti in Hookov zakon',
+        question: 'Kdaj rečemo, da vzmet še sledi Hookovemu zakonu?',
+        options: [
+          'Ko graf F(x) poteka kot premica skozi izhodišče',
+          'Ko graf F(x) tvori krog',
+          'Ko graf F(x) tvori parabolo',
+          'Ko sila ne zavisi od raztega'
+        ],
+        answer: 0,
+        explanation: 'Hookov zakon velja, dokler je odvisnost F(x) linearna – graf je premica skozi izhodišče.'
+      },
+      {
+        topic: 'Energija',
+        question: 'V najvišji točki skoka s palico ima skakalec predvsem:',
+        options: ['kinetično energijo', 'prožnostno energijo', 'potencialno energijo', 'notranjo energijo'],
+        answer: 2,
+        explanation: 'V najvišji točki je višina največja, zato prevladuje potencialna energija.'
+      },
+      {
+        topic: 'Energija',
+        question: 'Ko je palica najbolj upognjena, prevladuje:',
+        options: ['prožnostna energija', 'notranja energija', 'jedrska energija', 'svetlobna energija'],
+        answer: 0,
+        explanation: 'V upognjeni palici je shranjena prožnostna energija.'
+      },
+      {
+        topic: 'Energija',
+        question: 'V kateri točki skoka s palico je najjasneje izražena prožnostna energija?',
+        options: [
+          'V točki A – začetek zaleta',
+          'V točki B – palica je najbolj upognjena',
+          'V točki C – skakalec je najvišje',
+          'V točki D – pristajanje'
+        ],
+        answer: 1,
+        explanation: 'Ko je palica najbolj upognjena (točka B), je v njej shranjena največja prožnostna energija.'
+      },
+      {
+        topic: 'Energija',
+        question: 'Zakaj pri pristanku skakalca govorimo o notranji energiji?',
+        options: [
+          'Ker se energija prenese v toploto in deformacije telesa in podlage',
+          'Ker se višina poveča',
+          'Ker se masa zmanjša',
+          'Ker skakalec stoji'
+        ],
+        answer: 0,
+        explanation: 'Pri pristanku se potencialna in kinetična energija spremenita v notranjo energijo (toplota, deformacije).'
+      },
+      {
+        topic: 'Energija',
+        question: 'Katera formula je pravilna za potencialno energijo?',
+        options: ['Eₚ = m·g·h', 'Eₚ = 1/2·m·v²', 'Eₚ = F/x', 'Eₚ = W/t'],
+        answer: 0,
+        explanation: 'Potencialna energija zaradi višine je Eₚ = m·g·h.'
+      },
+      {
+        topic: 'Povprečje in delo',
+        question: 'Kaj najprej izračunamo pri nalogi, kjer imamo več izmerjenih višin skoka?',
+        options: ['moč', 'povprečno višino', 'relativno napako', 'koeficient k'],
+        answer: 1,
+        explanation: 'Iz več meritev višine najprej izračunamo povprečno višino, ki jo nato uporabimo naprej.'
+      },
+      {
+        topic: 'Povprečje in delo',
+        question: 'Koliko dela opravi skakalec z maso 65 kg, če je povprečna višina 4,094 m (g ≈ 9,81 m/s²)?',
+        options: ['približno 2610 J', 'približno 326 J', 'približno 544 J', 'približno 65 J'],
+        answer: 0,
+        explanation: 'W = m·g·h = 65·9,81·4,094 ≈ 2610 J.'
+      },
+      {
+        topic: 'Povprečje in delo',
+        question: 'Skakalec z maso 73 kg preskoči povprečno višino 4,146 m. Koliko dela opravi (g ≈ 9,81 m/s²)?',
+        options: ['približno 2970 J', 'približno 29690 J', 'približno 544 J', 'približno 326 J'],
+        answer: 1,
+        explanation: 'W = 73·9,81·4,146 ≈ 29690 J.'
+      },
+      {
+        topic: 'Povprečje in delo',
+        question: 'Če je povprečna višina 414,6 cm, jo za računanje dela pretvorimo v:',
+        options: ['414,6 m', '4,146 m', '41,46 m', '0,4146 m'],
+        answer: 1,
+        explanation: 'Centimetre delimo s 100: 414,6 cm = 4,146 m.'
+      },
+      {
+        topic: 'Moč',
+        question: 'Če opravljeno delo znaša 2610 J in čas 8 s, je moč:',
+        options: ['326 W', '32,6 W', '20880 W', '0,326 W'],
+        answer: 0,
+        explanation: 'P = W/t = 2610/8 ≈ 326 W.'
+      },
+      {
+        topic: 'Moč',
+        question: 'Če je delo 29690 J opravljeno v 12 s, je moč:',
+        options: ['približno 2474 W', 'približno 247,4 W', 'približno 24,74 W', 'približno 2,474 W'],
+        answer: 0,
+        explanation: 'P = W/t = 29690/12 ≈ 2474 W.'
+      },
+      {
+        topic: 'Moč',
+        question: '24742 W zapišemo v kilovatih kot:',
+        options: ['24,742 kW', '2,4742 kW', '247,42 kW', '0,24742 kW'],
+        answer: 0,
+        explanation: 'W delimo s 1000: 24742 W = 24,742 kW.'
+      },
+      {
+        topic: 'Raziskovalni postopek',
+        question: 'Vprašanje »Kakšno trditev lahko napovemo?« spada pod:',
+        options: ['merjenje', 'postavitev hipoteze', 'zavrnitev hipoteze', 'primerjanje'],
+        answer: 1,
+        explanation: 'Hipoteza je napoved, ki jo nato preverjamo z meritvami.'
+      },
+      {
+        topic: 'Raziskovalni postopek',
+        question: 'Vprašanje »Na kakšen način bi merili čas padanja?« spada pod:',
+        options: ['oblikovanje teorije', 'opazovanje', 'merjenje', 'zavrnitev hipoteze'],
+        answer: 2,
+        explanation: 'Ker govori o uporabi merilnika in postopku merjenja, spada pod merjenje.'
+      },
+      {
+        topic: 'Raziskovalni postopek',
+        question: 'Vprašanje »Ali rezultati merjenja napovedano trditev potrdijo?« najbolj sodi k:',
+        options: ['zavrnitvi ali potrditvi hipoteze', 'pretvorbi enot', 'Hookovemu zakonu', 'računanju moči'],
+        answer: 0,
+        explanation: 'Po meritvah preverimo, ali hipoteza drži ali jo moramo zavrniti.'
+      }
+    ];
+
+    let questions = [...baseQuestions];
+    let currentIndex = -1;
+    let score = 0;
+    let answered = [];
+    let revealed = false;
+
+    const els = {
+      startBtn: document.getElementById('startBtn'),
+      shuffleBtn: document.getElementById('shuffleBtn'),
+      resetBtn: document.getElementById('resetBtn'),
+      nextBtn: document.getElementById('nextBtn'),
+      showAnswerBtn: document.getElementById('showAnswerBtn'),
+      questionText: document.getElementById('questionText'),
+      options: document.getElementById('options'),
+      feedback: document.getElementById('feedback'),
+      topicLabel: document.getElementById('topicLabel'),
+      counterLabel: document.getElementById('counterLabel'),
+      progressBar: document.getElementById('progressBar'),
+      correctCount: document.getElementById('correctCount'),
+      wrongCount: document.getElementById('wrongCount'),
+      remainingCount: document.getElementById('remainingCount'),
+      scoreRing: document.getElementById('scoreRing'),
+      scoreValue: document.getElementById('scoreValue'),
+      reviewList: document.getElementById('reviewList'),
+      themeToggle: document.getElementById('themeToggle')
+    };
+
+    function shuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function resetQuiz(keepOrder = true) {
+      if (!keepOrder) questions = shuffle(baseQuestions);
+      currentIndex = -1;
+      score = 0;
+      answered = [];
+      revealed = false;
+      els.questionText.textContent = 'Pritisni »Začni kviz«, da dobiš prvo vprašanje.';
+      els.options.innerHTML = '';
+      els.feedback.className = 'feedback';
+      els.feedback.textContent = 'Tukaj se pokaže razlaga odgovora.';
+      els.topicLabel.textContent = 'Tema: priprava';
+      els.counterLabel.textContent = `Vprašanje 0 / ${questions.length}`;
+      els.progressBar.style.width = '0%';
+      els.nextBtn.disabled = true;
+      updateStats();
+      renderReview();
+    }
+
+    function startQuiz() {
+      if (currentIndex === -1) {
+        currentIndex = 0;
+        renderQuestion();
+      }
+    }
+
+    function renderQuestion() {
+      const q = questions[currentIndex];
+      revealed = false;
+      els.topicLabel.textContent = `Tema: ${q.topic}`;
+      els.counterLabel.textContent =
+        `Vprašanje ${currentIndex + 1} / ${questions.length}`;
+      els.progressBar.style.width =
+        `${(currentIndex / questions.length) * 100}%`;
+      els.questionText.textContent = q.question;
+      els.feedback.className = 'feedback';
+      els.feedback.textContent = 'Izberi odgovor ali klikni »Pokaži razlago«.';
+      els.nextBtn.disabled = true;
+      els.options.innerHTML = '';
+
+      q.options.forEach((option, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option';
+        btn.type = 'button';
+        btn.innerHTML =
+          `<span class="letter">${String.fromCharCode(65 + idx)}</span><span>${option}</span>`;
+        btn.addEventListener('click', () => answerQuestion(idx, btn));
+        els.options.appendChild(btn);
+      });
+
+      updateStats();
+    }
+
+    function answerQuestion(selectedIndex) {
+      if (revealed) return;
+      const q = questions[currentIndex];
+      const isCorrect = selectedIndex === q.answer;
+      revealed = true;
+      if (isCorrect) score += 1;
+
+      [...els.options.children].forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === q.answer) btn.classList.add('correct');
+        if (idx === selectedIndex && idx !== q.answer) btn.classList.add('wrong');
+        if (idx === selectedIndex) btn.classList.add('selected');
+      });
+
+      answered.push({
+        ...q,
+        selectedIndex,
+        isCorrect
+      });
+
+      els.feedback.className = `feedback ${isCorrect ? 'ok' : 'bad'}`;
+      els.feedback.innerHTML =
+        `<strong>${isCorrect ? 'Pravilno.' : 'Ni pravilno.'}</strong> ${q.explanation}`;
+      els.nextBtn.disabled = false;
+      updateStats();
+      renderReview();
+    }
+
+    function showExplanationOnly() {
+      if (currentIndex < 0) return;
+      const q = questions[currentIndex];
+      els.feedback.className = 'feedback';
+      els.feedback.innerHTML = `<strong>Razlaga:</strong> ${q.explanation}`;
+    }
+
+    function nextQuestion() {
+      if (currentIndex < 0) return;
+      if (currentIndex < questions.length - 1) {
+        currentIndex += 1;
+        renderQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function finishQuiz() {
+      els.progressBar.style.width = '100%';
+      els.topicLabel.textContent = 'Tema: zaključek';
+      els.counterLabel.textContent =
+        `Rešeno ${questions.length} / ${questions.length}`;
+      els.questionText.textContent =
+        'Kviz je končan. Preglej rezultate in seznam snovi za ponavljanje.';
+      els.options.innerHTML = '';
+      const percentage =
+        Math.round((score / questions.length) * 100);
+      let msg = 'Solidno, še nekaj ponovitve.';
+      if (percentage >= 85) msg = 'Odlično, snov imaš zelo dobro utrjeno.';
+      else if (percentage >= 65) msg = 'Dobro, ponovi predvsem napačne teme.';
+      else if (percentage < 40) msg =
+        'Začni z osnovami: enote, pretvorbe in formule.';
+      els.feedback.className = 'feedback';
+      els.feedback.innerHTML =
+        `<strong>Rezultat:</strong> ${score}/${questions.length} `
+        + `(${percentage} %). ${msg}`;
+      els.nextBtn.disabled = true;
+      updateStats();
+      renderReview(true);
+    }
+
+    function updateStats() {
+      const wrong = answered.filter(item => !item.isCorrect).length;
+      const remaining = questions.length - answered.length;
+      const percentage =
+        questions.length ? Math.round((score / questions.length) * 100) : 0;
+      els.correctCount.textContent = score;
+      els.wrongCount.textContent = wrong;
+      els.remainingCount.textContent = remaining;
+      els.scoreValue.textContent = `${percentage}%`;
+      els.scoreRing.style.background =
+        `conic-gradient(var(--color-primary) ${percentage * 3.6}deg, `
+        + `var(--color-surface-offset) 0deg)`;
+    }
+
+    function renderReview(final = false) {
+      if (answered.length === 0) {
+        els.reviewList.innerHTML = `
+          <div class="review-item">
+            <div class="review-topic">Priprava</div>
+            <p>
+              Po koncu kviza se tukaj pokaže seznam vprašanj, ki so ti delala
+              težave, skupaj s pravilnimi odgovori in kratko razlago.
+            </p>
+          </div>`;
+        return;
+      }
+
+      const source = final ? answered : answered.slice(-4);
+      els.reviewList.innerHTML = source.map(item => `
+        <article class="review-item ${item.isCorrect ? 'correct-item' : 'wrong-item'}">
+          <div class="review-topic">
+            ${item.topic} · ${item.isCorrect ? 'pravilno' : 'za ponoviti'}
+          </div>
+          <p><strong>Vprašanje:</strong> ${item.question}</p>
+          <p><strong>Pravilen odgovor:</strong> ${item.options[item.answer]}</p>
+          <p><strong>Razlaga:</strong> ${item.explanation}</p>
+        </article>
+      `).join('');
+    }
+
+    els.startBtn.addEventListener('click', startQuiz);
+    els.shuffleBtn.addEventListener('click', () => {
+      questions = shuffle(baseQuestions);
+      resetQuiz(true);
+    });
+    els.resetBtn.addEventListener('click', () => resetQuiz(true));
+    els.nextBtn.addEventListener('click', nextQuestion);
+    els.showAnswerBtn.addEventListener('click', showExplanationOnly);
+
+    els.themeToggle.addEventListener('click', () => {
+      const root = document.documentElement;
+      const next =
+        root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      els.themeToggle.textContent =
+        next === 'dark' ? '☀️ Svetli način' : '🌙 Temni način';
+    });
+
+    resetQuiz(true);
+  </script>
+</body>
+</html>
